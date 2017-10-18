@@ -21,7 +21,7 @@ def extract_context(file_path, context='CH', write_to_output=False):
 
         if write_to_output:
             fname, ext = os.path.splitext(file_path)
-            output = open(str(fname +'_extracted.csv'), 'w')
+            output = gzip.open(str(fname + "_" + context + '_extracted.csv.gz'), 'wt')
             output.write(",".join(['chromosome', 'location', 'strand', 'methylated_ratio', 'coverage_depth', 'context']))
             output.write("\n")
 
@@ -96,5 +96,5 @@ if __name__ == "__main__":
     if extension != '.gz':
         raise ValueError("Make sure your file is gzipped and has extension .gz"
                          )
-    ext_data = extract_context(sys.argv[1], write_to_output=False, context=c_context)
+    ext_data = extract_context(sys.argv[1], write_to_output=True, context=c_context)
     bin_cx_data(ext_data, filename, c_context, bin_size=200)
