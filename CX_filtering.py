@@ -73,11 +73,12 @@ def bin_cx_data(extracted_data, file_name, context, bin_size = 200):
 
     fname, ext = os.path.splitext(file_name)
 
-    with open(str(fname + '_bins.csv'), 'w') as output:
+    with open(str(fname + "_" + context +'_bins.csv'), 'w') as output:
         header = ",".join(['Bin Name', 'Avg Methylation', str(context + "s in bin")])
         output.write(header)
         output.write("\n")
         for key in list(bin_pct_data.keys()):
+            # chromosome = key.split("_")[0]
             output_bin_name = "chr" + str(key)
             output_bin_pct_methyl = mean(bin_pct_data[key])
             output_c_in_bin = c_in_bin[key]
@@ -96,4 +97,4 @@ if __name__ == "__main__":
         raise ValueError("Make sure your file is gzipped and has extension .gz"
                          )
     ext_data = extract_context(sys.argv[1], write_to_output=False, context=c_context)
-    bin_cx_data(ext_data, "test.csv", c_context, bin_size=200)
+    bin_cx_data(ext_data, filename, c_context, bin_size=200)
