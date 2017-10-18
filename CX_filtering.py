@@ -9,9 +9,9 @@ from statistics import mean
 def extract_context(file_path, context='CH', write_to_output=False):
     """
     :param file_path: file to be extracted, should be gzipped.
-    :param context: Methylated context to extract, could be CG, CHH, CHG, CH, or C
-    :param write_to_output: If true a csv file of extracted data will be generated
-    :return:
+    :param context: Methylated context to extract as a string, could be CG, CHH, CHG, CH, or C
+    :param write_to_output: If True a csv file of extracted data will be generated
+    :return: list of lists containing extracted data for each cytosine in given context
     """
 
     # open the gzipped file and find rows with matching context
